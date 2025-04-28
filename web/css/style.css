@@ -1,0 +1,4 @@
+
+body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
+form { display: inline-block; }
+input, button { display: block; margin: 10px auto; }
