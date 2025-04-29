@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Demana la teva cita</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Demana la teva cita</h1>
+    <form id="citaForm">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" placeholder="Escriu aqui..." required><br>
+        <label for="nom">Nom i cognoms:</label>
+        <input type="text" id="nom" placeholder="Escriu aqui..." required><br>
+        <label for="data_cita">Introdueix la data de la cita:</label>
+        <input type="date" id="data_cita" required><br>
+        <label for="motiu">Descriu el motiu de la consulta</label>
+        <textarea id="motiu_consulta" placeholder="Escriu aqui..." rows="5" required></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+    <script src="js/script.js"></script>
+</body>
+</html>

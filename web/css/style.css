@@ -1,4 +1,116 @@
+:root {
+    --color-1: #010B40;  /* Muy oscuro */
+    --color-2: #024873;  /* Azul intenso */
+    --color-3: #023859;  /* Azul oscuro */
+    --color-4: #62B7D9;  /* Azul claro */
+    --color-5: #F2F0F0;  /* Gris claro */
+}
 
-body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
-form { display: inline-block; }
-input, button { display: block; margin: 10px auto; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--color-5);
+    color: var(--color-3);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--color-1);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    border-radius: 6px;
+    margin-right: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+nav a {
+    color: white;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    text-align: center;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 1rem;
+}
+
+.banner {
+    margin: 2rem 0;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: 50%;
+}
+
+footer {
+    background-color: var(--color-1);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.socials {
+    margin-top: 0.5rem;
+}
+
+.socials a {
+    color: var(--color-4);
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    color: white;
+}
+
+.divFooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.divFooter a {
+    color: var(--color-4);
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.divFooter a:hover {
+    color: white;
+}

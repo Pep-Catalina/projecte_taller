@@ -1,16 +1,26 @@
+document.getElementById('citaForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que s'envii i recarregui la pàgina
 
-document.getElementById('citaForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const vehicle_id = document.getElementById('vehicle_id').value;
-    const data_cita = document.getElementById('data_cita').value;
-    const servei_sollicitat = document.getElementById('servei_sollicitat').value;
+    const cita = {
+        dni: document.getElementById('dni').value,
+        nom: document.getElementById('nom').value,
+        data_cita: document.getElementById('data_cita').value,
+        motiu_consulta: document.getElementById('motiu_consulta').value
+    };
 
-    const response = await fetch('http://localhost:5000/appointments', {
+    fetch('http://localhost:5000/appointments', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ vehicle_id, data_cita, servei_sollicitat })
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cita)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Cita creada correctament!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hi ha hagut un problema en crear la cita.');
     });
-
-    const result = await response.json();
-    alert(result.message);
 });
