@@ -1,0 +1,15 @@
+FROM alpine:latest
+
+LABEL author="Pep Catalina i Guillem Torres"
+LABEL title="MariaDB Digitalitzacio"
+LABEL version="1.0"
+
+RUN apk update && apk add --no-cache mariadb mariadb-client
+
+#Al copiar el script d'inicialització, es crea la base de dades i s'executa el script SQL
+# El script d'inicialització s'executa només si la base de dades no existeix
+COPY db_schema.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306
+
+CMD ["mysqld"]
