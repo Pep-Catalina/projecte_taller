@@ -1,26 +1,66 @@
-document.getElementById('citaForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita que s'envii i recarregui la pàgina
+document.getElementById('citaForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-    const cita = {
-        dni: document.getElementById('dni').value,
-        nom: document.getElementById('nom').value,
-        data_cita: document.getElementById('data_cita').value,
-        motiu_consulta: document.getElementById('motiu_consulta').value
-    };
+    // Recollim les dades del formulari
+    const dni = document.getElementById('dni').value.trim();
+    const nomComplet = document.getElementById('nom').value.trim();
+    const telefon = document.getElementById('telefon').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const dataCita = document.getElementById('data_cita').value;
+    const motiuConsulta = document.getElementById('motiu_consulta').value.trim();
 
-    fetch('http://localhost:5000/appointments', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cita)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('Cita creada correctament!');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hi ha hagut un problema en crear la cita.');
-    });
+    // Separem el nom i cognom (opcional, segons com tinguis la BBDD)
+    const [nom, ...restCognoms] = nomComplet.split(" ");
+    const cognom = restCognoms.join(" ");
+
+    try {
+        // Primer, creem el pacient
+        const respostaPacient = await fetch('http://localhost:5000/pacients', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nom: nom,
+                cognom: cognom,
+                telefon: telefon,
+                correu: email
+            })
+        });
+
+        const resultatPacient = await respostaPacient.json();
+
+        if (!respostaPacient.ok) {
+            throw new Error(resultatPacient.error || "No s'ha pogut crear el pacient.");
+        }
+
+        alert("Pacient creat correctament.");
+
+        // Un cop el pacient estigui creat, obtenim l'ID del pacient creat
+        const pacientId = resultatPacient.id; // Assegura't que el backend retorni l'ID del pacient creat
+
+        // Ara, creem la visita (cita)
+        const respostaVisita = await fetch('http://localhost:5000/visites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                pacient_id: pacientId,
+                data_visita: dataCita,
+                motiu_visita: motiuConsulta
+            })
+        });
+
+        const resultatVisita = await respostaVisita.json();
+
+        if (respostaVisita.ok) {
+            alert("Cita creada correctament.");
+        } else {
+            throw new Error(resultatVisita.error || "No s'ha pogut crear la cita.");
+        }
+        
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
 });
