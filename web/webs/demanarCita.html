@@ -8,6 +8,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="./../css/style.css" />
         <link rel="stylesheet" href="./../css/demanarCita.css" />
+        <script src="../js/script.js" defer></script>
 
         <!-- BOOTSTRAP ICONOS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -28,21 +29,28 @@
 
     <main>
         <h2>Demana la teva cita</h2>
-        <form id="citaForm">
+        <form id="citaForm" autocomplete="on"> <!-- Permet l'autocompletat per a tot el formulari -->
             <label for="dni">DNI:</label>
-            <input type="text" id="dni" placeholder="Escriu aqui..." required><br>
+            <input type="text" id="dni" placeholder="Escriu aqui..." autocomplete="off" required><br>
+            
             <label for="nom">Nom i cognoms:</label>
-            <input type="text" id="nom" placeholder="Escriu aqui..." required><br>
+            <input type="text" id="nom" placeholder="Escriu aqui..." autocomplete="name" required><br>
+            
             <label for="telefon">Telèfon:</label>
-            <input type="tel" id="telefon" placeholder="Escriu aqui..." required><br>
+            <input type="tel" id="telefon" placeholder="Escriu aqui..." autocomplete="tel" required><br>
+            
             <label for="email">Correu electrònic:</label>
-            <input type="email" id="email" placeholder="Escriu aqui..." required><br>
+            <input type="email" id="email" placeholder="Escriu aqui..." autocomplete="email" required><br>
+            
             <label for="data_cita">Introdueix la data de la cita:</label>
             <input type="date" id="data_cita" required><br>
-            <label for="motiu">Descriu el motiu de la consulta</label>
-            <textarea id="motiu_consulta" placeholder="Escriu aqui..." rows="5" required></textarea><br>
-            <button type="submit">Enviar</button>
+            
+            <label for="motiu_consulta">Descriu el motiu de la consulta</label>
+            <textarea id="motiu_consulta" placeholder="Escriu aqui..." rows="5" autocomplete="off" required></textarea><br>
+            
+            <button type="submit" >Enviar</button>
         </form>
+        
     </main>
 
     <footer>
