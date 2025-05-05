@@ -49,3 +49,11 @@ ALTER TABLE visites
     REFERENCES especialitats(id)
     ON UPDATE CASCADE
     ON DELETE CASCADE;
+
+
+
+-- USUARI ADMIN
+
+CREATE USER 'admin'@'%' IDENTIFIED BY 'Educem00.';
+GRANT ALL PRIVILEGES ON centre_medic.* TO 'admin'@'%';
+FLUSH PRIVILEGES;
