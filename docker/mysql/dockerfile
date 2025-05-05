@@ -6,9 +6,11 @@ LABEL version="1.0"
 
 RUN apk update && apk add --no-cache mariadb mariadb-client
 
+VOLUME ["/var/lib/mysql"]
+
 #Al copiar el script d'inicialització, es crea la base de dades i s'executa el script SQL
 # El script d'inicialització s'executa només si la base de dades no existeix
-COPY db_schema.sql /docker-entrypoint-initdb.d/
+COPY init.sql /docker-entrypoint-initdb.d/init.sql
 
 EXPOSE 3306
 

@@ -10,7 +10,7 @@ RUN apk update && apk add nginx bind bind-tools
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY named.* /etc/bind/
 COPY db.* /etc/bind/
-COPY centreMedic /var/www/centremedic
+#COPY centreMedic /var/www/centremedic
 
 VOLUME /var/www
 VOLUME /etc/bind
