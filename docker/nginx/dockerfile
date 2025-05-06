@@ -4,7 +4,7 @@ LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="NGINX Digitalitzacio"
 LABEL version="1.0"
 
-RUN apk update && apk add nginx bind bind-tools 
+RUN apk update && apk add nginx bind bind-tools iputils -y
 
 
 COPY nginx.conf /etc/nginx/nginx.conf

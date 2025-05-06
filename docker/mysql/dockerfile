@@ -4,14 +4,18 @@ LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="MariaDB Digitalitzacio"
 LABEL version="1.0"
 
-RUN apk update && apk add --no-cache mariadb mariadb-client
+RUN apk update && apk add --no-cache mariadb mariadb-client bash curl cronie gzip iputils -y
 
 VOLUME ["/var/lib/mysql"]
+VOLUME ["/Backup_MySQL"]
 
-#Al copiar el script d'inicialització, es crea la base de dades i s'executa el script SQL
-# El script d'inicialització s'executa només si la base de dades no existeix
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
+COPY backup.sh /Backup_MySQL/backup.sh
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /Backup_MySQL/backup.sh /entrypoint.sh \
+    && echo "59 23 * * * /Backup_MySQL/backup.sh >> /var/log/cron.log 2>&1" > /etc/crontabs/root
 
 EXPOSE 3306
 
-CMD ["mysqld"]
+ENTRYPOINT ["/entrypoint.sh"]
