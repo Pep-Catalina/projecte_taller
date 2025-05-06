@@ -3,7 +3,7 @@ USE centre_medic;
 
 -- CREACIÓ DE TAULES:
 CREATE TABLE pacients (
-    id INT UNSIGNED,
+    dni CHAR(9),
     nom VARCHAR(25),
     cognom VARCHAR(25),
     telefon VARCHAR(15),
@@ -26,9 +26,9 @@ CREATE TABLE visites (
 
 -- PRIMARY KEYS
 ALTER TABLE pacients
-    ADD CONSTRAINT pk_pacients PRIMARY KEY (id);
-ALTER TABLE pacients    
-    MODIFY COLUMN id INT UNSIGNED AUTO_INCREMENT NOT NULL;
+    ADD CONSTRAINT pk_pacients PRIMARY KEY (dni);
+-- ALTER TABLE pacients    
+--     MODIFY COLUMN id INT UNSIGNED AUTO_INCREMENT NOT NULL;
 
 ALTER TABLE especialitats
     ADD CONSTRAINT pk_especialitats PRIMARY KEY (id);
@@ -42,7 +42,7 @@ ALTER TABLE visites
 
 ALTER TABLE visites
     ADD CONSTRAINT fk_pacient FOREIGN KEY (pacient_id) 
-    REFERENCES pacients(id)
+    REFERENCES pacients(dni)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     ADD CONSTRAINT fk_especialitat FOREIGN KEY (especialitat_id) 

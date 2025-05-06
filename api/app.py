@@ -54,9 +54,10 @@ def create_pacient():
     try:
         # Inserim el pacient
         cursor.execute("""
-            INSERT INTO pacients (nom, cognom, telefon, correu)
-            VALUES (%s, %s, %s, %s)
-        """, (data['nom'], data['cognom'], data['telefon'], data['correu']))
+            INSERT INTO pacients (dni, nom, cognom, telefon, correu)
+            VALUES (%s, %s, %s, %s, %s)
+            """, (data['dni'], data['nom'], data['cognom'], data['telefon'], data['correu']))
+
         db.commit()
 
         pacient_id = cursor.lastrowid  # Obtenim l'ID del pacient creat
