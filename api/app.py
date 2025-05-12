@@ -27,14 +27,7 @@ def connect_db():
         print(f"Error de connexió a la base de dades: {err}")
         return None
 
-@app.route('/pacients', methods=['GET'])
-def get_pacients():
-    db = connect_db()
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM pacients")
-    pacients = cursor.fetchall()
-    db.close()
-    return jsonify(pacients)
+
 
 
 @app.route('/pacients', methods=['POST'])
@@ -70,7 +63,8 @@ def create_pacient():
 #Mostrar consulta a la taula
 @app.route('/pacients', methods=['GET'])
 def obtenir_pacients():
-    cursor = connexio.cursor(dictionary=True)
+    db = connect_db()
+    cursor = db.cursor(dictionary=True)
     cursor.execute("""
         SELECT p.dni, p.nom, p.cognom, v.data_visita, v.motiu_visita
         FROM pacients p
@@ -78,6 +72,7 @@ def obtenir_pacients():
     """)
     pacients = cursor.fetchall()
     cursor.close()
+    db.close()
     return jsonify(pacients)
 
 
