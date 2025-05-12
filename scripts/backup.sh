@@ -16,7 +16,7 @@ NOMBRE_ARCHIVO="backup_"$NOMBRE_BD"_"$(date +%Y%m%d_%H%M%S)".sql.gz"
 
 # --- Generar Copia de Seguretat---
 echo -e "{$BLAU}Iniciando copia de seguridad de la base de datos '$NOMBRE_BD'...{$FICOLOR}"
-mysqldump -u"$USUARIO" -p"$PASSWORD" -h"$HOST" "$NOMBRE_BD" | gzip > "$RUTA_COPIAS/$NOMBRE_ARCHIVO"
+mariadb-dump -u"$USUARIO" -p"$PASSWORD" -h"$HOST" "$NOMBRE_BD" | gzip > "$RUTA_COPIAS/$NOMBRE_ARCHIVO"
 
 # --- Verificacio de la copia de seguretat---
 if [ $? -eq 0 ]; then

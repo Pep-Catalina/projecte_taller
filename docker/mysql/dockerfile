@@ -7,14 +7,18 @@ LABEL version="1.0"
 # Instalar cron
 RUN apt-get update && \
     apt-get install -y cron && \
-    apt-get clean
+    apt-get clean && \
+    mkdir -p /Backup_MySQL
 
 # Copiar scripts y ficheros
-COPY backup.sh /Backup_MySQL/backup.sh
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
-COPY entrypoint.sh /entrypoint.sh
+COPY backup.sh /Backup_MySQL/backup.sh
+COPY my-contrab.txt /etc/cron.d/db-backup
 
-RUN chmod +x /Backup_MySQL/backup.sh /entrypoint.sh
+# Establecer permisos y registrar cron
+RUN chmod +x /Backup_MySQL/backup.sh && \
+    chmod 0644 /etc/cron.d/db-backup && \
+    crontab /etc/cron.d/db-backup
 
-# Entrypoint personalizado
-ENTRYPOINT ["/entrypoint.sh"]
+# No sobrescribir el ENTRYPOINT y dejar el CMD por defecto
+CMD ["mariadbd"]
