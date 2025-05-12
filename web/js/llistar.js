@@ -32,9 +32,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 fila.appendChild(nom);
 
                 const dataVisita = document.createElement("td");
-                // Si la data de visita és null o buida, mostrar "No disponible"
-                dataVisita.textContent = pacient.data_visita ? pacient.data_visita : "No disponible";
-                fila.appendChild(dataVisita);
+// Si la data de visita és null o buida, mostrar "No disponible"
+if (pacient.data_visita) {
+    const data = new Date(pacient.data_visita);
+    // Convertim la data en el format compactat: YYYY-MM-DD
+    const dataFormatejada = data.toISOString().split('T')[0];
+    dataVisita.textContent = dataFormatejada;
+} else {
+    dataVisita.textContent = "No disponible";
+}
+fila.appendChild(dataVisita);
+
 
                 const motiuVisita = document.createElement("td");
                 // Si el motiu de la visita és null o buid, mostrar "No disponible"
