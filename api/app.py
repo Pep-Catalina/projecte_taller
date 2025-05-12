@@ -2,7 +2,6 @@
 from flask import Flask, request, jsonify
 import mysql.connector
 from flask_cors import CORS
-import sqlite3
 
 app = Flask(__name__)
 CORS(app)
