@@ -1,29 +1,43 @@
-
 version: '3'
 services:
   db:
-    image: mariadb
+    image: mariadb-digitalitzacio
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: taller
+      MYSQL_ROOT_PASSWORD: Educem00
     networks:
-      - taller_net
+      digi-network:
+        ipv4_address: 192.168.1.3
+    ports:
+      - "3366:3306"
+    hostname: srv-db
+
   api:
-    build: ./api
+    build: api-digitalitzacio
     ports:
       - "5000:5000"
     depends_on:
       - db
     networks:
-      - taller_net
+      digi-network:
+        ipv4_address: 192.168.1.2
+    hostname: srv-api
+
   web:
-    image: nginx:alpine
+    image: nginx-digitalitzacio
     volumes:
       - ./web:/usr/share/nginx/html
     ports:
       - "8080:80"
+      - "4433:443"
     networks:
-      - taller_net
+      digi-network:
+        ipv4_address: 192.168.1.1
+    hostname: srv-web
 
 networks:
-  taller_net:
+  digi-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.254

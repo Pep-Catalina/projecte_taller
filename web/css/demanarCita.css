@@ -31,7 +31,7 @@ label {
 
 input[type="text"],
 input[type="date"],
-input[type="telefon"],
+input[type="tel"],
 input[type="email"],
 textarea {
     padding: 10px;
@@ -49,7 +49,7 @@ textarea {
 
 input[type="text"],
 input[type="date"],
-input[type="telefon"],
+input[type="tel"],
 input[type="email"],
 textarea::placeholder {
     color: #999;
