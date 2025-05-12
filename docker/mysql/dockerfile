@@ -1,20 +1,16 @@
-FROM alpine:latest
+FROM mariadb:latest
 
 LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="MariaDB Digitalitzacio"
 LABEL version="1.0"
 
-RUN apk update && apk add --no-cache mariadb mariadb-client bash curl cronie gzip iputils -y
-
-VOLUME ["/var/lib/mysql"]
-VOLUME ["/Backup_MySQL"]
+ENV MYSQL_ROOT_PASSWORD=Educem00.
 
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
 COPY backup.sh /Backup_MySQL/backup.sh
 COPY entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /Backup_MySQL/backup.sh /entrypoint.sh \
-    && echo "59 23 * * * /Backup_MySQL/backup.sh >> /var/log/cron.log 2>&1" > /etc/crontabs/root
+RUN chmod +x /Backup_MySQL/backup.sh /entrypoint.sh
 
 EXPOSE 3306
 
