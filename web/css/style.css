@@ -114,7 +114,9 @@ footer {
     align-items: center;
     flex-direction: row;
 }
-
+label{
+    padding: 1em;
+}
 .divFooter a {
     color: var(--color-4);
     text-decoration: none;
