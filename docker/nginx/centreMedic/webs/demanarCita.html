@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ca">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Centre Mèdic</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="./../css/style.css" />
+        <link rel="stylesheet" href="./../css/demanarCita.css" />
+        <script src="../js/script.js" defer></script>
+
+        <!-- BOOTSTRAP ICONOS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    </head>
+    <body>
+    <header>
+        <div class="logo-container">
+            <a href="./../index.html"><img src="./../img/logo_centreMedic.webp" alt="Logo Centre Mèdic" class="logo" href="./../index.html" /></a>
+            <h1>Centre Mèdic</h1>
+        </div>
+        <nav>
+            <a href="./../index.html">Inici</a>
+            <a href="./demanarCita.html">Demanar Cita</a>
+            <a href="./llistarCites.html">Llista de Cites</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Demana la teva cita</h2>
+        
+        <form id="citaForm" autocomplete="on"> <!-- Permet l'autocompletat per a tot el formulari -->
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" placeholder="Escriu aqui..." autocomplete="off" required><br>
+            
+            <label for="nom">Nom i cognoms:</label>
+            <input type="text" id="nom" placeholder="Escriu aqui..." autocomplete="name" required><br>
+            
+            <label for="telefon">Telèfon:</label>
+            <input type="tel" id="telefon" placeholder="Escriu aqui..." autocomplete="tel" required><br>
+            
+            <label for="email">Correu electrònic:</label>
+            <input type="email" id="email" placeholder="Escriu aqui..." autocomplete="email" required><br>
+            
+            <label for="data_cita">Introdueix la data de la cita:</label>
+            <input type="date" id="data_cita" required><br>
+            
+            <label for="motiu_consulta">Descriu el motiu de la consulta</label>
+            <textarea id="motiu_consulta" placeholder="Escriu aqui..." rows="5" autocomplete="off" required></textarea><br>
+            
+            <button type="submit" >Enviar</button>
+        </form>
+        
+    </main>
+
+    <footer>
+        <p>Centre Mèdic Privat · Carrer Salut, 123 · Barcelona</p>
+        <div class="divFooter">
+            <a href="#" class="bi bi-envelope"> info@centremedic.cat</a>
+            <p> | </p>
+            <a href="#" class="bi bi-telephone"> 933 123 456</a>
+        </div>
+        <div class="socials">
+            <a href="#" class="bi bi-facebook"> Facebook</a> | 
+            <a href="#" class="bi bi-instagram"> Instagram</a> | 
+            <a href="#" class="bi bi-twitter-x"> Twitter X</a>
+        </div>
+    </footer>
+    </body>
+</html>
