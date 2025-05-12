@@ -4,29 +4,33 @@ h2 {
     color: #023859;
     margin-bottom: 20px;
 }
-
+/* Estils per a la taula */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 15px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
 }
 
 th, td {
-    border: 1px solid #62B7D9;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
+    border: 1px solid #ddd;
 }
 
-thead {
-    background-color: #024873;
+th {
+    background-color: #023859;
     color: white;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f0f8ff;
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-tbody tr:hover {
-    background-color: #e0f0fa;
+tr:hover {
+    background-color: #ddd;
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
 }

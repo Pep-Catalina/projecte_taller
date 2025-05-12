@@ -1,6 +1,8 @@
--- Script para crear la base de datos, tablas y usuarios
+drop database if exists centre_medic;
 CREATE DATABASE centre_medic;
 USE centre_medic;
+
+
 
 -- CREACIÓN DE TABLAS
 CREATE TABLE pacients (
@@ -19,7 +21,7 @@ CREATE TABLE especialitats (
 
 CREATE TABLE visites (
     id INT UNSIGNED NOT NULL,
-    pacient_id INT UNSIGNED NOT NULL,
+    pacient_id CHAR(9) NOT NULL UNIQUE,
     especialitat_id INT UNSIGNED NOT NULL,
     data_visita DATE NOT NULL,
     motiu_visita VARCHAR(255)
@@ -52,15 +54,21 @@ ALTER TABLE visites
 
 -- USUARIOS Y PERMISOS
 -- USUARI ADMINISTRADOR
+DROP USER IF EXISTS 'admin_centre_medic'@'%';
+DROP USER IF EXISTS 'admin'@'%';
+DROP USER IF EXISTS 'gestorBackups'@'%';
+DROP USER IF EXISTS 'status_user'@'%';
+DROP USER IF EXISTS 'gestorBackups'@'%';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'Educem00.';
 GRANT ALL PRIVILEGES ON centre_medic.* TO 'admin'@'%';
 
 -- USUARI GESTOR BACKUPS
 CREATE USER 'gestorBackups'@'%' IDENTIFIED BY 'Educem00.';
-GRANT EVENT, LOCK TABLES, PROCESS, RELOAD, REPLICATION CLIENT, SELECT, SHOW DATABASES, SHOW VIEW ON centre_medic.* TO 'gestorBackups'@'%';
+GRANT EVENT, LOCK TABLES, PROCESS, RELOAD, REPLICATION CLIENT, SELECT, SHOW DATABASES, SHOW VIEW ON *.* TO 'gestorBackups'@'%';
 
--- USUARI STATUS USER (Comprovar si la base de dades està activa)
+-- USUARI STATUS USER (Comprovar si la base de dades està activa)ç
+
 CREATE USER 'status_user'@'%' IDENTIFIED BY 'Educem00.';
-GRANT PROCESS ON centre_medic.* TO 'status_user'@'%';
+GRANT PROCESS ON *.* TO 'status_user'@'%';
 
 FLUSH PRIVILEGES;
