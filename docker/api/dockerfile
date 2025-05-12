@@ -1,5 +1,5 @@
 # Imagen base ligera de Python
-FROM python:latest-slim
+FROM python:3.13-slim
 LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="Api Digitalitzacio"
 LABEL version="1.0"

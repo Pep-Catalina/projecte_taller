@@ -1,17 +1,20 @@
 FROM mariadb:latest
 
 LABEL author="Pep Catalina i Guillem Torres"
-LABEL title="MariaDB Digitalitzacio"
+LABEL title="MariaDB con Backup"
 LABEL version="1.0"
 
-ENV MYSQL_ROOT_PASSWORD=Educem00.
+# Instalar cron
+RUN apt-get update && \
+    apt-get install -y cron && \
+    apt-get clean
 
-COPY init.sql /docker-entrypoint-initdb.d/init.sql
+# Copiar scripts y ficheros
 COPY backup.sh /Backup_MySQL/backup.sh
+COPY init.sql /docker-entrypoint-initdb.d/init.sql
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /Backup_MySQL/backup.sh /entrypoint.sh
 
-EXPOSE 3306
-
+# Entrypoint personalizado
 ENTRYPOINT ["/entrypoint.sh"]

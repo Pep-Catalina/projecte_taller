@@ -1,4 +1,4 @@
-drop database if exists centre_medic;
+DROP DATABASE IF EXISTS centre_medic;
 CREATE DATABASE centre_medic;
 USE centre_medic;
 
