@@ -16,7 +16,7 @@ def connect_db():
     try:
         db = mysql.connector.connect(
             host="192.168.1.3",  # O el que sigui, depenent de la teva configuració
-            user="root",
+            user="admin",
             password="Educem00.",
             database="centre_medic"
         )
