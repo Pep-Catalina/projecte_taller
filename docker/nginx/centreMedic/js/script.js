@@ -23,8 +23,8 @@ document.getElementById('citaForm').addEventListener('submit', async function (e
                 cognom,
                 telefon,
                 correu: email,
-                data_cita: dataCita,           // Afegir data de la cita
-                motiu_consulta: motiuConsulta  // Afegir motiu de la consulta
+                data_cita: dataCita,
+                motiu_consulta: motiuConsulta
             })
         });
 
