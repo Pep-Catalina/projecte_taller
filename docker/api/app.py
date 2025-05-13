@@ -1,8 +1,6 @@
-
 from flask import Flask, request, jsonify
 import mysql.connector
 from flask_cors import CORS
-import sqlite3
 
 app = Flask(__name__)
 CORS(app)
@@ -17,7 +15,7 @@ def favicon():
 def connect_db():
     try:
         db = mysql.connector.connect(
-            host="localhost",  # O el que sigui, depenent de la teva configuració
+            host="192.168.1.3",  # O el que sigui, depenent de la teva configuració
             user="root",
             password="Educem00.",
             database="centre_medic"
@@ -27,14 +25,7 @@ def connect_db():
         print(f"Error de connexió a la base de dades: {err}")
         return None
 
-@app.route('/pacients', methods=['GET'])
-def get_pacients():
-    db = connect_db()
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM pacients")
-    pacients = cursor.fetchall()
-    db.close()
-    return jsonify(pacients)
+
 
 
 @app.route('/pacients', methods=['POST'])
@@ -70,7 +61,8 @@ def create_pacient():
 #Mostrar consulta a la taula
 @app.route('/pacients', methods=['GET'])
 def obtenir_pacients():
-    cursor = connexio.cursor(dictionary=True)
+    db = connect_db()
+    cursor = db.cursor(dictionary=True)
     cursor.execute("""
         SELECT p.dni, p.nom, p.cognom, v.data_visita, v.motiu_visita
         FROM pacients p
@@ -78,6 +70,7 @@ def obtenir_pacients():
     """)
     pacients = cursor.fetchall()
     cursor.close()
+    db.close()
     return jsonify(pacients)
 
 

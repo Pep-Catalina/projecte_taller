@@ -15,7 +15,7 @@ def favicon():
 def connect_db():
     try:
         db = mysql.connector.connect(
-            host="localhost",  # O el que sigui, depenent de la teva configuració
+            host="192.168.1.3",  # O el que sigui, depenent de la teva configuració
             user="root",
             password="Educem00.",
             database="centre_medic"
