@@ -50,12 +50,6 @@ def create_pacient():
         db.commit()
         return jsonify({"message": "Pacient i visita creats correctament."}), 201
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        db.rollback()
-        print(f"Error: {e}")
-    return jsonify({"error": "Error en crear el pacient i la visita."}), 500
-
         db.rollback()
         print(f"Error: {e}")
         return jsonify({"error": "Error en crear el pacient i la visita."}), 500
