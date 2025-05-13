@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Copiar e instalar dependencias
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && pip install net-tools
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar todo el código de la API
 COPY . .
