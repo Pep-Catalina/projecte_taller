@@ -8,3 +8,4 @@ docker container run -d --name nginx-digitalitzacio --dns 192.168.1.1 --network 
 docker container run -d --name api-digitalitzacio --dns 192.168.1.1 --network digi-network --ip 192.168.1.2 -p 5000:5000 --hostname srv-api api-digitalitzacio
 docker container run -d --name mariadb-digitalitzacio -e MYSQL_ROOT_PASSWORD=Educem00 --dns 192.168.1.1 --dns-search centremedic.cat --network digi-network --ip 192.168.1.3 -p 3366:3306 --hostname srv-db mariadb-digitalitzacio
 
+docker-compose up -d --build

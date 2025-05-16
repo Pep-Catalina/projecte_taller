@@ -18,7 +18,8 @@ def connect_db():
             host="192.168.1.3",  # O el que sigui, depenent de la teva configuració
             user="admin",
             password="Educem00.",
-            database="centre_medic"
+            database="centre_medic",
+            port="3306"
         )
         return db
     except mysql.connector.Error as err:
@@ -77,4 +78,4 @@ def obtenir_pacients():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=3306)

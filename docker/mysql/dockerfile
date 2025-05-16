@@ -1,4 +1,4 @@
-FROM mariadb:latest
+FROM mariadb:11.3
 
 LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="MariaDB con Backup"
