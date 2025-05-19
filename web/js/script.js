@@ -12,7 +12,7 @@ document.getElementById('citaForm').addEventListener('submit', async function (e
     const cognom = restCognoms.join(" ");
 
     try {
-        const resposta = await fetch('http://192.168.1.2:5000/pacients', {
+        const resposta = await fetch('http://localhost:5000/pacients', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
