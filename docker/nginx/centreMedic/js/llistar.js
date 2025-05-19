@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     async function carregarPacients() {
         try {
             // Fer la petició per obtenir les dades dels pacients
-            const resposta = await fetch('http://192.168.1.3:3306/pacients');
+            const resposta = await fetch('http://192.168.1.2:5000/pacients');
             const dades = await resposta.json();
 
             // Comprovar si les dades han arribat correctament
