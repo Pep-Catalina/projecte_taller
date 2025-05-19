@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
-import mysql.connector
 from flask_cors import CORS
+import mysql.connector
 import os
 
-
 app = Flask(__name__)
+# Change strict origin CORS to allow all origins
 CORS(app)
+
 @app.route('/')
 def home():
     return 'Benvingut al Centre Mèdic!'  # O retorna una plantilla HTML si és el cas
@@ -21,23 +22,27 @@ def connect_db():
             user="admin",
             password="Educem00.",
             database="centre_medic",
-            port="3306"
+            port="3306",
+            charset="utf8mb4",
+            collation="utf8mb4_unicode_ci"
         )
         return db
     except mysql.connector.Error as err:
         print(f"Error de connexió a la base de dades: {err}")
         return None
 
-
-
-
 @app.route('/pacients', methods=['POST'])
 def create_pacient():
-    data = request.get_json()
-    db = connect_db()
-    cursor = db.cursor()
+
+    # if db is None:
+    #     return jsonify({"error": "No s'ha pogut connectar a la base de dades."}), 500
 
     try:
+        data = request.get_json()
+        db = connect_db()
+        cursor = db.cursor()
+
+
         # 1. Inserir el pacient
         cursor.execute("""
             INSERT INTO pacients (dni, nom, cognom, telefon, correu)
@@ -48,18 +53,15 @@ def create_pacient():
         cursor.execute("""
             INSERT INTO visites (pacient_id, especialitat_id, data_visita, motiu_visita)
             VALUES (%s, %s, %s, %s)
-        """, (data['dni'], 1, data['data_cita'], data['motiu_consulta']))
+        """, (data['dni'], None, data['data_cita'], data['motiu_consulta']))
 
         db.commit()
         return jsonify({"message": "Pacient i visita creats correctament."}), 201
     except Exception as e:
-        db.rollback()
-        print(f"Error: {e}")
-        return jsonify({"error": "Error en crear el pacient i la visita."}), 500
-    finally:
-        db.close()
-
-
+        # db.rollback()
+        return jsonify({"msg": "Error en crear el pacient i la visita.","error":f"{e}"}), 500
+    # finally:
+        # db.close()
 
 #Mostrar consulta a la taula
 @app.route('/pacients', methods=['GET'])
@@ -76,8 +78,6 @@ def obtenir_pacients():
     db.close()
     return jsonify(pacients)
 
-
-
 if __name__ == '__main__':
-    app.debug = True
+#    app.debug = True
     app.run(host='0.0.0.0', port=5000)

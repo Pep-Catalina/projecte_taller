@@ -22,7 +22,7 @@ CREATE TABLE especialitats (
 CREATE TABLE visites (
     id INT UNSIGNED NOT NULL,
     pacient_id CHAR(9) NOT NULL UNIQUE,
-    especialitat_id INT UNSIGNED NOT NULL,
+    especialitat_id INT UNSIGNED NULL,
     data_visita DATE NOT NULL,
     motiu_visita VARCHAR(255)
 );
