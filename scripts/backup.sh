@@ -11,17 +11,17 @@ USUARIO="gestorBackups"
 PASSWORD="Educem00."
 HOST="localhost"
 NOMBRE_BD="centre_medic"
-RUTA_COPIAS="/Backup_MySQL/"
-NOMBRE_ARCHIVO="backup_"$NOMBRE_BD"_"$(date +%Y%m%d_%H%M%S)".sql.gz"
+RUTA_COPIAS="/Backup_MySQL"
+NOMBRE_ARCHIVO="backup_${NOMBRE_BD}_$(date +%Y%m%d_%H%M%S).sql.gz"
 
-# --- Generar Copia de Seguretat---
-echo -e "{$BLAU}Iniciando copia de seguridad de la base de datos '$NOMBRE_BD'...{$FICOLOR}"
-mariadb-dump -u"$USUARIO" -p"$PASSWORD" -h"$HOST" "$NOMBRE_BD" | gzip > "$RUTA_COPIAS/$NOMBRE_ARCHIVO"
+# --- Generar Copia de Seguridad ---
+echo -e "${BLAU}Iniciando copia de seguridad de la base de datos '$NOMBRE_BD'...${FICOLOR}"
+mariadb-dump -u"$USUARIO" -p"$PASSWORD" -h"$HOST" "$NOMBRE_BD" | gzip > "${RUTA_COPIAS}/${NOMBRE_ARCHIVO}"
 
-# --- Verificacio de la copia de seguretat---
+# --- Verificación de la copia de seguridad ---
 if [ $? -eq 0 ]; then
-    echo "{$VERD}Copia de seguretat creada correctament: $RUTA_COPIAS/$NOMBRE_ARCHIVO {$FICOLOR}"
+    echo -e "${VERD}Copia de seguridad creada correctamente: ${RUTA_COPIAS}/${NOMBRE_ARCHIVO}${FICOLOR}"
 else
-    echo "{$VERMELL}Error en la creacio de la copia de seguretat.{$FICOLOR}"
+    echo -e "${VERMELL}Error en la creación de la copia de seguridad.${FICOLOR}"
     exit 1
 fi

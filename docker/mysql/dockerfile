@@ -4,22 +4,22 @@ LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="MariaDB con Backup"
 LABEL version="1.0"
 
-# Instalar cron
+# Instal·lar cron i utilitats
 RUN apt update && \
     apt install -y cron && \
     apt install net-tools && \
     apt clean && \
     mkdir -p /Backup_MySQL
 
-# Copiar scripts y ficheros
+# Copiar scripts i fitxers de configuració
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
 COPY backup.sh /Backup_MySQL/backup.sh
 COPY my-contrab.txt /etc/cron.d/db-backup
 
-# Establecer permisos y registrar cron
+# Establir permisos i configurar cron
 RUN chmod +x /Backup_MySQL/backup.sh && \
     chmod 0644 /etc/cron.d/db-backup && \
     crontab /etc/cron.d/db-backup
 
-# No sobrescribir el ENTRYPOINT y dejar el CMD por defecto
+# Iniciar el servidor de la base de dades
 CMD ["mariadbd"]

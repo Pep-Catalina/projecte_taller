@@ -1,21 +1,20 @@
-# Imagen base ligera de Python
 FROM python:3.13-slim
 LABEL author="Pep Catalina i Guillem Torres"
 LABEL title="Api Digitalitzacio"
 LABEL version="1.0"
 
-# Establecer el directorio de trabajo
+# Establir directori de treball
 WORKDIR /app
 
-# Copiar e instalar dependencias
+# Copiar e instal·lar dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && pip install net-tools
 
-# Copiar todo el código de la API
+# Copiar todo el codi de la API
 COPY . .
 
-# Exponer el puerto en el que corre Flask (5000 por defecto)
+# Exposar el por 5000 de FLASK (5000 por defecto)
 EXPOSE 5000
 
-# Comando para iniciar Flask en modo producción
+# Iniciar el servidor Flask
 CMD ["python", "app.py"]
