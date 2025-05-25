@@ -4,7 +4,7 @@ import mysql.connector
 import os
 
 app = Flask(__name__)
-# Change strict origin CORS to allow all origins
+# Canviar la política de CORS estricta per permetre tots els orígens
 CORS(app)
 
 @app.route('/')
@@ -33,9 +33,6 @@ def connect_db():
 
 @app.route('/pacients', methods=['POST'])
 def create_pacient():
-
-    # if db is None:
-    #     return jsonify({"error": "No s'ha pogut connectar a la base de dades."}), 500
 
     try:
         data = request.get_json()

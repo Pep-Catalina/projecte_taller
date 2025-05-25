@@ -53,7 +53,6 @@ ALTER TABLE visites
     ON DELETE CASCADE;
 
 -- USUARIOS Y PERMISOS
--- USUARI ADMINISTRADOR
 DROP USER IF EXISTS 'admin_centre_medic'@'%';
 DROP USER IF EXISTS 'admin'@'%';
 DROP USER IF EXISTS 'gestorBackups'@'%';
